@@ -90,6 +90,7 @@ class UserController extends Controller
 
     public function logout(){
         if (Auth::check()) {
+            /** @disregard P1013  */
             Auth::user()->tokens()->delete();
             return response()->json(["message" => "logged out"]);
         } else {
