@@ -13,7 +13,15 @@ class ProgressController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $progresses = Progress::all();
+            return response()->json([
+                'status' => true,
+                'message' => 'progresses are accessible',
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
