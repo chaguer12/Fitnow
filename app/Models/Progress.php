@@ -18,7 +18,7 @@ class Progress extends Model
         'chest',
         'bicep',
         'leg',
-
+        'user_id',
 
     ];
 
