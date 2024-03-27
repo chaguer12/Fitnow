@@ -127,4 +127,27 @@ class ProgressController extends Controller
             ],500);
         }
     }
+
+    public function status($id){
+        try {
+            $progress = Progress::where('id',$id)->first();
+            $progress->delete();
+            if($progress->status == 'Non términé'){
+                $progress->update([
+                    'status' => 'términé',
+                ]);
+                return response()->json([
+                    'status' => true,
+                    'message' => 'your session is complete !',
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ],500);
+        }
+
+
+    }
 }
