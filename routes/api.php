@@ -28,4 +28,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/index',[ProgressController::class,'index']);
     Route::post('/add',[ProgressController::class,'store']);
     Route::patch('/update/{id}',[ProgressController::class,'update']);
+    Route::delete('/delete/{id}',[ProgressController::class,'destroy']);
 });

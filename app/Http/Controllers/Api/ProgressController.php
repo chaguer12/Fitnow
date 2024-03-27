@@ -110,8 +110,21 @@ class ProgressController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Progress $progress)
+    public function destroy($id)
     {
-        //
+        try {
+            $progress = Progress::where('id',$id)->first();
+            $progress->delete();
+            return response()->json([
+                'status' => true,
+                'message' => 'Progress deleted successfully',
+
+            ],200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ],500);
+        }
     }
 }
