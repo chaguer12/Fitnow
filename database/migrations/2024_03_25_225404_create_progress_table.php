@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('progress', function (Blueprint $table) {
             $table->id();
-            $table->string('poids');
-            $table->string('taille');
-            $table->string('age');
+            $table->integer('poids');
+            $table->integer('taille');
+            $table->integer('age');
+            $table->integer('chest');
+            $table->integer('bicep');
+            $table->integer('leg');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('status')->default('Non términé');

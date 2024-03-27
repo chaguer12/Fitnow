@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ProgressController;
 use App\Http\Controllers\Api\UserController;
+use App\Models\Progress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::post('/auth/logout',[UserController::class,'logout']);
     Route::get('/index',[ProgressController::class,'index']);
+    Route::post('/add',[ProgressController::class,'store']);
 });
