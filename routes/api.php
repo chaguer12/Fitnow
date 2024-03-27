@@ -27,4 +27,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/auth/logout',[UserController::class,'logout']);
     Route::get('/index',[ProgressController::class,'index']);
     Route::post('/add',[ProgressController::class,'store']);
+    Route::patch('/update/{id}',[ProgressController::class,'update']);
 });

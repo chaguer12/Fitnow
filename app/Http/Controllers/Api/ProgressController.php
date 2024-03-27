@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProgressRequest;
+use App\Http\Requests\ProgressUpdateRequest;
 use App\Models\Progress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,9 +82,29 @@ class ProgressController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Progress $progress)
+    public function update(ProgressUpdateRequest $request,$id)
     {
-        //
+        try {
+            $validated = $request->validated();
+            $progress = Progress::where('id',$id)->first();
+            if($progress->status !== 'Non términé'){
+                return response()->json([
+                    'status' => false,
+                    'message' => "you can't update an unfinished progress",
+                ]);
+            }
+            $progress->update($validated);
+            return response()->json([
+                'status' => true,
+                'message' => 'progress updated successfully',
+            ],200);
+        
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ],500);
+        }
     }
 
     /**
