@@ -20,7 +20,10 @@ class ProgressController extends Controller
                 'message' => 'progresses are accessible',
             ]);
         } catch (\Throwable $th) {
-            //throw $th;
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ],500);
         }
     }
 
