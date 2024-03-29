@@ -84,6 +84,7 @@ class UserController extends Controller
                 'message' => $th->getMessage(),
             ],500);
         }
+
     }
 
     //logout user

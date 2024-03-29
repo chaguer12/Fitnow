@@ -2,22 +2,41 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ProgressRequest;
-use App\Http\Requests\ProgressUpdateRequest;
+use App\Models\User;
 use App\Models\Progress;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ProgressRequest;
+use App\Http\Requests\ProgressUpdateRequest;
+use Illuminate\Support\Facades\Log;
 
 class ProgressController extends Controller
 {
+    public function test (){
+        return "here";
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        
+        // Log::info("Received request: " . json_encode($_SERVER));
+        // try {
+        //     $progresses = Progress::where('user_id',Auth::user()->id)->get();
+        //     return response()->json([
+        //         'status' => true,
+        //         'message' => Progress::where('user_id',26)->get(),
+        //     ]);
+        // } catch (\Exception $e) {
+        //     dd($e->getMessage()); // Dump the exception message for debugging
+        // }
+        
+        // Log::info();
         try {
-            $progresses = Progress::where('user_id',Auth::user()->id)->get();
+            $progresses = Progress::where('user_id',1)->get();
+            //dd('heere');
             return response()->json([
                 'status' => true,
                 'message' => 'progresses are accessible',
@@ -29,14 +48,8 @@ class ProgressController extends Controller
             ],500);
         }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+      
+  
 
     /**
      * Store a newly created resource in storage.
@@ -71,13 +84,7 @@ class ProgressController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Progress $progress)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -139,7 +146,7 @@ class ProgressController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'your session is complete !',
-                ]);
+                ],200);
             }
         } catch (\Throwable $th) {
             return response()->json([

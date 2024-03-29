@@ -17,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/unauthenticated',function(){
+    return response()->json(["error" => "User not authenticated"], 401); 
+})->name('login');
+
+Route::get('/index',[ProgressController::class,'index']);
+Route::get('/test',[ProgressController::class,'test']);
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -25,7 +33,6 @@ Route::post('/auth/login',[UserController::class,'loginUser']);
 Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::post('/auth/logout',[UserController::class,'logout']);
-    Route::get('/index',[ProgressController::class,'index']);
     Route::post('/add',[ProgressController::class,'store']);
     Route::patch('/update/{id}',[ProgressController::class,'update']);
     Route::delete('/delete/{id}',[ProgressController::class,'destroy']);
